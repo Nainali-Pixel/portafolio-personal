@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-  "start": "node server.js"
-},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",    
+    "start": "node server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,5 +15,14 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "mysql2": "^3.22.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nainali-Pixel/portafolio-personal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nainali-Pixel/portafolio-personal/issues"
+  },
+  "homepage": "https://github.com/Nainali-Pixel/portafolio-personal#readme"
 }
