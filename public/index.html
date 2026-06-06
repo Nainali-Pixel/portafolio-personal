@@ -22,8 +22,26 @@
         <section id="sobre-mi" class="page">
         </section>
         <section id="proyectos" class="page">
+            <div class="project-card">
+                <h2>Proyecto 1: Aplicación de Tareas</h2>
+                <p>Descripción: Una aplicación web para gestionar tareas diarias.</p>
+            </div>
+            <div class="project-card">
+                <h2>Proyecto 2: Blog Personal</h2>
+                <p>Descripción: Un blog personal para compartir mis pensamientos y experiencias.</p>
+            </div>
         </section>
         <section id="contacto" class="page">
+            <form id="contact-form">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="name" required>
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="message" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <div id="alerta" class="alert"></div>
         </section>
     </main>
     <footer>
