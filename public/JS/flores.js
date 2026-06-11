@@ -26,6 +26,7 @@ const PRODUCTOS_DEFAULT = [
 let productos = [];   // Lista de productos cargados
 let carrito = {};     // { productoId: { producto, cantidad } }
 let categoriaActual = 'todos';
+let busquedaActual = '';
 
 // =============================================
 // CARGAR PRODUCTOS (desde API o respaldo)
@@ -45,8 +46,18 @@ async function cargarProductos() {
     productos = PRODUCTOS_DEFAULT;
   } finally {
     loading.style.display = 'none';
-    renderizarProductos(productos);
+    filtrarProductos();
   }
+}
+
+function filtrarProductos() {
+  const filtrados = productos.filter(p => {
+    const cumpleCategoria = categoriaActual === 'todos' || p.categoria === categoriaActual;
+    const cumpleBusqueda = p.nombre.toLowerCase().includes(busquedaActual.toLowerCase());
+    return cumpleCategoria && cumpleBusqueda;
+  });
+
+  renderizarProductos(filtrados);
 }
 
 // =============================================
@@ -89,16 +100,17 @@ document.querySelectorAll('.filtro-btn').forEach(btn => {
     btn.classList.add('active');
 
     categoriaActual = btn.dataset.cat;
-
-    // Filtrar y renderizar
-    if (categoriaActual === 'todos') {
-      renderizarProductos(productos);
-    } else {
-      const filtrados = productos.filter(p => p.categoria === categoriaActual);
-      renderizarProductos(filtrados);
-    }
+    filtrarProductos();
   });
 });
+
+const searchInput = document.getElementById('flower-search');
+if (searchInput) {
+  searchInput.addEventListener('input', (event) => {
+    busquedaActual = event.target.value;
+    filtrarProductos();
+  });
+}
 
 // =============================================
 // CARRITO - AGREGAR PRODUCTO

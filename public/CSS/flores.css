@@ -222,13 +222,28 @@ body {
   justify-content: center;
 }
 
-.filtro-btn {
-  background: var(--gris-claro);
-  border: 2px solid transparent;
-  color: var(--texto-suave);
-  padding: 8px 20px;
-  border-radius: 25px;
-  font-size: 0.95rem;
+  .busqueda-group {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #flower-search {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid #e8e8e8;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #flower-search:focus {
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 6px rgba(230, 62, 109, 0.08);
+  }
+
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;

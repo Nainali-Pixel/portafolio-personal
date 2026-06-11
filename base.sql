@@ -1,15 +1,15 @@
-CREATE DATABASE IF NOT EXISTS portafolio_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE portafolio_db;
 USE portafolio_db;
 
-CREATE TABLE IF NOT EXISTS contactos (
+CREATE TABLE contactos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   email VARCHAR(120) NOT NULL,
   mensaje TEXT NOT NULL,
   creado_at DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
-CREATE TABLE IF NOT EXISTS pedidos (
+CREATE TABLE pedidos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   cliente_nombre VARCHAR(120) NOT NULL,
   cliente_email VARCHAR(120) NOT NULL,
@@ -17,16 +17,16 @@ CREATE TABLE IF NOT EXISTS pedidos (
   productos TEXT NOT NULL,
   total DECIMAL(10,2) NOT NULL,
   creado_at DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
-CREATE TABLE IF NOT EXISTS bestiario_usuarios (
+CREATE TABLE bestiario_usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(120) NOT NULL UNIQUE,
   password VARCHAR(80) NOT NULL,
   nombre VARCHAR(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);
 
-CREATE TABLE IF NOT EXISTS bestiario_colecciones (
+CREATE TABLE bestiario_colecciones (
   id INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id INT NOT NULL,
   nombre VARCHAR(120) NOT NULL,
@@ -40,4 +40,4 @@ CREATE TABLE IF NOT EXISTS bestiario_colecciones (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_usuario_nombre (usuario_id, nombre),
   FOREIGN KEY (usuario_id) REFERENCES bestiario_usuarios(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+);

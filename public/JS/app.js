@@ -75,13 +75,14 @@ const secciones = document.querySelectorAll('.page');
 function navegarA(paginaId) {
   // Ocultar todas las secciones
   secciones.forEach(s => s.classList.remove('active'));
-  // Mostrar la sección solicitada
-  const seccion = document.getElementById(paginaId);
+  // Mostrar la sección solicitada o regresar a inicio si no existe
+  const seccion = document.getElementById(paginaId) || document.getElementById('inicio');
   if (seccion) {
     seccion.classList.add('active');
+    location.hash = seccion.id;
     // Ejecutar funciones especiales al entrar a ciertas secciones
-    if (paginaId === 'habilidades') animarBarrasHabilidad();
-    if (paginaId === 'sobre-mi') animarContadores();
+    if (seccion.id === 'habilidades') animarBarrasHabilidad();
+    if (seccion.id === 'sobre-mi') animarContadores();
   }
 
   // Actualizar estado activo en el menú
@@ -97,6 +98,15 @@ navLinks.forEach(link => {
     navegarA(link.dataset.page);
   });
 });
+
+// Navegación mediante hash y carga inicial
+window.addEventListener('hashchange', () => {
+  const destino = location.hash.replace('#', '') || 'inicio';
+  navegarA(destino);
+});
+
+const paginaInicial = location.hash.replace('#', '') || 'inicio';
+setTimeout(() => navegarA(paginaInicial), 0);
 
 // =============================================
 // EFECTO TYPEWRITER
