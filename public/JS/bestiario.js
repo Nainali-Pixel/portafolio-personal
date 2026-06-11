@@ -1,8 +1,14 @@
 const loginForm = document.getElementById('login-form');
 const loginAlert = document.getElementById('login-alert');
+const heroPanel = document.querySelector('.hero-panel');
 const coleccionSection = document.getElementById('coleccion-section');
 const usuarioNombre = document.getElementById('usuario-nombre');
+const perfilNombre = document.getElementById('perfil-nombre');
+const perfilEmail = document.getElementById('perfil-email');
 const coleccionGrid = document.getElementById('coleccion-grid');
+const amigosGrid = document.getElementById('amigos-grid');
+const friendsSection = document.getElementById('friends-section');
+const mapSection = document.getElementById('map-section');
 const logoutBtn = document.getElementById('logout-btn');
 const searchInput = document.getElementById('coleccion-search');
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -10,8 +16,17 @@ const viewButtons = document.querySelectorAll('.view-tab');
 const detallePanel = document.getElementById('detalle-panel');
 const detalleCard = document.getElementById('detalle-card');
 const detalleClose = document.getElementById('detalle-close');
+const perfilBtn = document.getElementById('perfil-btn');
+const cambiarPasswordBtn = document.getElementById('cambiar-password-btn');
+const perfilModal = document.getElementById('perfil-modal');
+const passwordModal = document.getElementById('password-modal');
+const perfilCerrar = document.getElementById('perfil-cerrar');
+const passwordCerrar = document.getElementById('password-cerrar');
+const perfilForm = document.getElementById('perfil-form');
+const passwordForm = document.getElementById('password-form');
 
 let coleccionActual = [];
+let amigosActual = [];
 let filtroActivo = 'todos';
 let vistaActual = 'descubiertas';
 let usuarioActual = null;
@@ -23,11 +38,6 @@ const TODAS_LAS_CRATUREAS = [
   { id: 4, nombre: 'Abyssal Coral', tipo: 'Acuático', descripcion: 'Nace entre arrecifes con destellos de galaxias marinas.', poder: 'Tromba marina', atributo: 'Agua', habitat: 'Arrecifes profundos', alimentacion: 'Plancton estelar y corrientes frías', datos_curiosos: 'Cambia de color con la marea', tamano: '1.6 m', peso: '38 kg', rareza: 'Rara', nivel: 4 },
   { id: 5, nombre: 'Fénix Nebular', tipo: 'Aéreo', descripcion: 'Resurge de las cenizas con plumas de neón cósmico.', poder: 'Llama astral', atributo: 'Fuego', habitat: 'Cielos nocturnos', alimentacion: 'Brasa cósmica y semillas de estrella', datos_curiosos: 'Su canto crea auroras', tamano: '1.9 m', peso: '24 kg', rareza: 'Legendaria', nivel: 5 },
   { id: 6, nombre: 'Titán Lunar', tipo: 'Terrestre', descripcion: 'Pisa la tierra dejando senderos de polvo de estrellas.', poder: 'Terremoto lunar', atributo: 'Tierra', habitat: 'Llanuras de piedra lunar', alimentacion: 'Raíces energizadas y minerales', datos_curiosos: 'Sus pisadas despiertan cristales', tamano: '2.4 m', peso: '110 kg', rareza: 'Épica', nivel: 5 }
-];
-
-const CUENTAS_DE_PRUEBA = [
-  { email: 'mystic@luna.com', password: 'luna2024' },
-  { email: 'orion@estrella.com', password: 'orion2024' }
 ];
 
 function mostrarAlertaLogin(mensaje, tipo = 'error') {
@@ -47,11 +57,16 @@ async function iniciarSesion(email, password) {
 
     if (datos.ok) {
       usuarioActual = datos.usuario;
+      amigosActual = Array.isArray(datos.amigos) ? datos.amigos : [];
       coleccionActual = datos.coleccion;
       usuarioNombre.textContent = usuarioActual.nombre;
+      actualizarPerfilUI();
       coleccionSection.classList.remove('hidden');
-      loginForm.closest('.hero-panel').classList.add('hidden');
+      friendsSection.classList.remove('hidden');
+      mapSection.classList.remove('hidden');
+      heroPanel.classList.add('hidden');
       mostrarColeccion();
+      mostrarAmigos(Array.isArray(datos.amigos) ? datos.amigos : undefined);
       mostrarAlertaLogin(`✅ Colección cargada para ${usuarioActual.nombre}`, 'success');
     } else {
       mostrarAlertaLogin(`❌ ${datos.msg}`);
@@ -149,6 +164,76 @@ function mostrarDetalle(id) {
   detallePanel.classList.remove('hidden');
 }
 
+function mostrarAmigos() {
+  const renderAmigos = (lista) => {
+    document.getElementById('perfil-amigos-count').textContent = `${lista.length} amigo${lista.length === 1 ? '' : 's'}`;
+    amigosGrid.innerHTML = lista.length > 0 ? lista.map(amigo => `
+      <article class="friend-card ${amigo.id === usuarioActual.id ? 'friend-me' : ''}">
+        <div>
+          <h4>${amigo.nombre}</h4>
+          <p>${amigo.email}</p>
+        </div>
+        <button class="friend-view-btn" data-id="${amigo.id}">Ver perfil</button>
+      </article>
+    `).join('') : '<p class="empty-message">Este perfil aún no tiene amigos conectados.</p>';
+
+    amigosGrid.querySelectorAll('.friend-view-btn').forEach(btn => {
+      btn.addEventListener('click', () => mostrarPerfilAmigo(btn.dataset.id));
+    });
+  };
+
+  if (!usuarioActual || !usuarioActual.id) {
+    renderAmigos([]);
+    return;
+  }
+
+  fetch(`/api/bestiario/usuario/${usuarioActual.id}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.ok) {
+        mostrarAlertaLogin('No se pudieron cargar los amigos del perfil.');
+        return;
+      }
+      amigosActual = Array.isArray(data.amigos) ? data.amigos : [];
+      renderAmigos(amigosActual);
+    })
+    .catch(() => mostrarAlertaLogin('No se pudo conectar con el servidor para cargar amigos.'));
+}
+
+function mostrarPerfilAmigo(id) {
+  fetch(`/api/bestiario/usuario/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.ok) {
+        mostrarAlertaLogin('No se pudo cargar el perfil del amigo.');
+        return;
+      }
+
+      const coleccion = data.coleccion || [];
+      detalleCard.innerHTML = `
+        <div class="detalle-header">
+          <h3>${data.usuario.nombre}</h3>
+          <span class="detalle-rareza">Perfil amigo</span>
+        </div>
+        <div class="detalle-meta">
+          <span>${data.usuario.email}</span>
+          <span>${coleccion.length} criaturas</span>
+        </div>
+        <div class="detalle-grid detalle-grid--full">
+          ${coleccion.map(item => `
+            <div>
+              <strong>${item.nombre}</strong>
+              <p>${item.tipo} · Nivel ${item.nivel}</p>
+              <p>${item.descripcion}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      detallePanel.classList.remove('hidden');
+    })
+    .catch(() => mostrarAlertaLogin('Error cargando perfil de amigo.'));
+}
+
 function cerrarDetalle() {
   detallePanel.classList.add('hidden');
 }
@@ -160,16 +245,126 @@ detallePanel.addEventListener('click', (event) => {
   }
 });
 
+function actualizarPerfilUI() {
+  if (!usuarioActual) return;
+  perfilNombre.textContent = usuarioActual.nombre;
+  perfilEmail.textContent = usuarioActual.email;
+}
+
+function abrirPerfil() {
+  if (!usuarioActual) return;
+  document.getElementById('perfil-nombre-input').value = usuarioActual.nombre;
+  document.getElementById('perfil-email-input').value = usuarioActual.email;
+  perfilModal.classList.remove('hidden');
+}
+
+function abrirPassword() {
+  passwordForm.reset();
+  passwordModal.classList.remove('hidden');
+}
+
+function cerrarPerfilModal() {
+  perfilModal.classList.add('hidden');
+}
+
+function cerrarPasswordModal() {
+  passwordModal.classList.add('hidden');
+}
+
+perfilBtn.addEventListener('click', abrirPerfil);
+cambiarPasswordBtn.addEventListener('click', abrirPassword);
+perfilCerrar.addEventListener('click', cerrarPerfilModal);
+passwordCerrar.addEventListener('click', cerrarPasswordModal);
+perfilModal.addEventListener('click', (event) => {
+  if (event.target === perfilModal) cerrarPerfilModal();
+});
+passwordModal.addEventListener('click', (event) => {
+  if (event.target === passwordModal) cerrarPasswordModal();
+});
+
+perfilForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const nombre = document.getElementById('perfil-nombre-input').value.trim();
+  const email = document.getElementById('perfil-email-input').value.trim();
+
+  try {
+    const respuesta = await fetch(`/api/bestiario/usuario/${usuarioActual.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email })
+    });
+    const datos = await respuesta.json();
+
+    if (datos.ok) {
+      usuarioActual.nombre = nombre;
+      usuarioActual.email = email;
+      actualizarPerfilUI();
+      usuarioNombre.textContent = usuarioActual.nombre;
+      cerrarPerfilModal();
+      mostrarAlertaLogin('✅ Perfil actualizado correctamente', 'success');
+    } else {
+      mostrarAlertaLogin(`❌ ${datos.msg}`);
+    }
+  } catch (error) {
+    mostrarAlertaLogin('❌ Error al actualizar el perfil. Intenta de nuevo.');
+  }
+});
+
+passwordForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const currentPassword = document.getElementById('old-password-input').value.trim();
+  const newPassword = document.getElementById('new-password-input').value.trim();
+  const confirmPass = document.getElementById('confirm-password-input').value.trim();
+
+  if (newPassword.length < 4) {
+    mostrarAlertaLogin('❌ La nueva contraseña debe tener al menos 4 caracteres');
+    return;
+  }
+  if (newPassword !== confirmPass) {
+    mostrarAlertaLogin('❌ Las contraseñas no coinciden');
+    return;
+  }
+
+  try {
+    const respuesta = await fetch(`/api/bestiario/usuario/${usuarioActual.id}/password`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword, newPassword })
+    });
+    const datos = await respuesta.json();
+
+    if (datos.ok) {
+      cerrarPasswordModal();
+      mostrarAlertaLogin('✅ Contraseña actualizada correctamente', 'success');
+    } else {
+      mostrarAlertaLogin(`❌ ${datos.msg}`);
+    }
+  } catch (error) {
+    mostrarAlertaLogin('❌ Error al actualizar la contraseña. Intenta de nuevo.');
+  }
+});
+
 function limpiarSesion() {
   usuarioActual = null;
   coleccionActual = [];
   filtroActivo = 'todos';
+  vistaActual = 'descubiertas';
   coleccionSection.classList.add('hidden');
   loginForm.closest('.hero-panel').classList.remove('hidden');
   loginForm.reset();
   usuarioNombre.textContent = '';
+  perfilNombre.textContent = '';
+  perfilEmail.textContent = '';
   filterButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tipo === 'todos'));
+  viewButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.vista === 'descubiertas'));
   coleccionGrid.innerHTML = '';
+  amigosGrid.innerHTML = '';
+  friendsSection.classList.add('hidden');
+  mapSection.classList.add('hidden');
+  heroPanel.classList.remove('hidden');
+  heroPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  cerrarPerfilModal();
+  cerrarPasswordModal();
 }
 
 loginForm.addEventListener('submit', (event) => {
@@ -177,16 +372,6 @@ loginForm.addEventListener('submit', (event) => {
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
   iniciarSesion(email, password);
-});
-
-document.querySelectorAll('.quick-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const email = btn.dataset.email;
-    const password = btn.dataset.password;
-    document.getElementById('email').value = email;
-    document.getElementById('password').value = password;
-    iniciarSesion(email, password);
-  });
 });
 
 logoutBtn.addEventListener('click', limpiarSesion);

@@ -76,6 +76,18 @@ async function inicializarBaseDatos() {
   `);
 
   await db.execute(`
+    CREATE TABLE IF NOT EXISTS bestiario_amigos (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      usuario_id INT NOT NULL,
+      amigo_id INT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE KEY uq_usuario_amigo (usuario_id, amigo_id),
+      FOREIGN KEY (usuario_id) REFERENCES bestiario_usuarios(id) ON DELETE CASCADE,
+      FOREIGN KEY (amigo_id) REFERENCES bestiario_usuarios(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `);
+
+  await db.execute(`
     ALTER TABLE bestiario_colecciones
       ADD COLUMN IF NOT EXISTS imagen VARCHAR(240) DEFAULT '',
       ADD COLUMN IF NOT EXISTS habitat VARCHAR(120) NOT NULL DEFAULT '',
@@ -116,6 +128,21 @@ async function inicializarBaseDatos() {
     ids['orion@estrella.com'], 'Abyssal Coral', 'Acuático', 'Nace entre arrecifes con destellos de galaxias marinas.', 'Tromba marina', 'Agua', '', 'Arrecifes profundos', 'Plancton estelar y corrientes frías', 'Cambia de color con la marea', '1.6 m', '38 kg', 'Rara', 4,
     ids['orion@estrella.com'], 'Fénix Nebular', 'Aéreo', 'Resurge de las cenizas con plumas de neón cósmico.', 'Llama astral', 'Fuego', '', 'Cielos nocturnos', 'Brasa cósmica y semillas de estrella', 'Su canto crea auroras', '1.9 m', '24 kg', 'Legendaria', 5,
     ids['orion@estrella.com'], 'Titán Lunar', 'Terrestre', 'Pisa la tierra dejando senderos de polvo de estrellas.', 'Terremoto lunar', 'Tierra', '', 'Llanuras de piedra lunar', 'Raíces energizadas y minerales', 'Sus pisadas despiertan cristales', '2.4 m', '110 kg', 'Épica', 5
+  ]);
+
+  await db.execute(`INSERT IGNORE INTO bestiario_amigos (usuario_id, amigo_id) VALUES
+    (?, ?), (?, ?), (?, ?),
+    (?, ?), (?, ?), (?, ?),
+    (?, ?), (?, ?)
+  `, [
+    ids['mystic@luna.com'], ids['orion@estrella.com'],
+    ids['orion@estrella.com'], ids['mystic@luna.com'],
+    ids['mystic@luna.com'], ids['orion@estrella.com'],
+    ids['orion@estrella.com'], ids['mystic@luna.com'],
+    ids['mystic@luna.com'], ids['orion@estrella.com'],
+    ids['orion@estrella.com'], ids['mystic@luna.com'],
+    ids['mystic@luna.com'], ids['orion@estrella.com'],
+    ids['orion@estrella.com'], ids['mystic@luna.com']
   ]);
 }
 
@@ -185,11 +212,113 @@ app.post('/api/bestiario/login', async (req, res) => {
       'SELECT id, nombre, tipo, descripcion, poder, atributo, imagen, habitat, alimentacion, datos_curiosos, tamano, peso, rareza, nivel FROM bestiario_colecciones WHERE usuario_id = ? ORDER BY nivel DESC, nombre ASC',
       [usuario.id]
     );
+    const [amigos] = await db.execute(
+      'SELECT u.id, u.nombre, u.email FROM bestiario_amigos a JOIN bestiario_usuarios u ON a.amigo_id = u.id WHERE a.usuario_id = ? ORDER BY u.nombre ASC',
+      [usuario.id]
+    );
 
-    res.json({ ok:true, usuario: { id: usuario.id, nombre: usuario.nombre, email }, coleccion });
+    res.json({ ok:true, usuario: { id: usuario.id, nombre: usuario.nombre, email }, coleccion, amigos });
   } catch (error) {
     console.error('Error en /api/bestiario/login:', error);
     res.status(500).json({ ok:false, msg:'Error al iniciar sesión' });
+  }
+});
+
+app.get('/api/bestiario/amigos', async (req, res) => {
+  try {
+    const [rows] = await db.execute(
+      'SELECT id, nombre, email FROM bestiario_usuarios ORDER BY nombre ASC'
+    );
+    res.json({ ok:true, usuarios: rows });
+  } catch (error) {
+    console.error('Error en /api/bestiario/amigos:', error);
+    res.status(500).json({ ok:false, msg:'No se pudieron cargar los amigos' });
+  }
+});
+
+app.get('/api/bestiario/usuario/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const [users] = await db.execute(
+      'SELECT id, nombre, email FROM bestiario_usuarios WHERE id = ?',
+      [userId]
+    );
+    if (users.length === 0) {
+      return res.status(404).json({ ok:false, msg:'Usuario no encontrado' });
+    }
+    const usuario = users[0];
+    const [coleccion] = await db.execute(
+      'SELECT nombre, tipo, descripcion, rareza, nivel FROM bestiario_colecciones WHERE usuario_id = ? ORDER BY nivel DESC, nombre ASC',
+      [userId]
+    );
+    const [amigos] = await db.execute(
+      'SELECT u.id, u.nombre, u.email FROM bestiario_amigos a JOIN bestiario_usuarios u ON a.amigo_id = u.id WHERE a.usuario_id = ? ORDER BY u.nombre ASC',
+      [userId]
+    );
+    res.json({ ok:true, usuario, coleccion, amigos });
+  } catch (error) {
+    console.error('Error en /api/bestiario/usuario/:id:', error);
+    res.status(500).json({ ok:false, msg:'No se pudo cargar el perfil del usuario' });
+  }
+});
+
+app.put('/api/bestiario/usuario/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { nombre, email } = req.body;
+
+    if (!nombre || !email) {
+      return res.status(400).json({ ok:false, msg:'Faltan datos del perfil' });
+    }
+
+    const [existing] = await db.execute(
+      'SELECT id FROM bestiario_usuarios WHERE email = ? AND id <> ?',
+      [email, userId]
+    );
+
+    if (existing.length > 0) {
+      return res.status(409).json({ ok:false, msg:'El correo ya está en uso' });
+    }
+
+    await db.execute(
+      'UPDATE bestiario_usuarios SET nombre = ?, email = ? WHERE id = ?',
+      [nombre, email, userId]
+    );
+
+    res.json({ ok:true, msg:'Perfil actualizado correctamente' });
+  } catch (error) {
+    console.error('Error en /api/bestiario/usuario/:id PUT:', error);
+    res.status(500).json({ ok:false, msg:'No se pudo actualizar el perfil' });
+  }
+});
+
+app.put('/api/bestiario/usuario/:id/password', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ ok:false, msg:'Faltan datos de la contraseña' });
+    }
+
+    const [rows] = await db.execute(
+      'SELECT id FROM bestiario_usuarios WHERE id = ? AND password = ?',
+      [userId, currentPassword]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ ok:false, msg:'Contraseña actual incorrecta' });
+    }
+
+    await db.execute(
+      'UPDATE bestiario_usuarios SET password = ? WHERE id = ?',
+      [newPassword, userId]
+    );
+
+    res.json({ ok:true, msg:'Contraseña actualizada correctamente' });
+  } catch (error) {
+    console.error('Error en /api/bestiario/usuario/:id/password PUT:', error);
+    res.status(500).json({ ok:false, msg:'No se pudo actualizar la contraseña' });
   }
 });
 
