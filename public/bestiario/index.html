@@ -55,6 +55,10 @@
         <button id="logout-btn" class="btn-logout">Cerrar sesión</button>
       </div>
       <div class="coleccion-actions">
+        <div class="view-switch">
+          <button class="view-tab active" data-vista="descubiertas">Descubiertas</button>
+          <button class="view-tab" data-vista="sin-descubrir">Sin descubrir</button>
+        </div>
         <div class="filter-group">
           <button class="filter-btn active" data-tipo="todos">Todos</button>
           <button class="filter-btn" data-tipo="Acuático">Acuáticos</button>
@@ -67,6 +71,10 @@
         </div>
       </div>
       <div class="cards-grid" id="coleccion-grid"></div>
+      <section class="detalle-panel hidden" id="detalle-panel">
+        <button class="detalle-close" id="detalle-close">×</button>
+        <div class="detalle-card" id="detalle-card"></div>
+      </section>
     </section>
   </main>
 

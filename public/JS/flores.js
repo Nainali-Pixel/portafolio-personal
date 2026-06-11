@@ -8,16 +8,16 @@
 // DATOS DE PRODUCTOS (respaldo si falla el servidor)
 // =============================================
 const PRODUCTOS_DEFAULT = [
-  { id: 1, nombre: 'Rosa Roja',       precio: 2990, descripcion: 'Elegante rosa de tallo largo, símbolo del amor',      emoji: '🌹', categoria: 'Rosas'     },
-  { id: 2, nombre: 'Tulipán Morado',  precio: 1990, descripcion: 'Delicado tulipán de color morado intenso',             emoji: '🌷', categoria: 'Tulipanes' },
-  { id: 3, nombre: 'Girasol',         precio: 1490, descripcion: 'Alegre girasol que ilumina cualquier espacio',          emoji: '🌻', categoria: 'Silvestres'},
-  { id: 4, nombre: 'Orquídea Blanca', precio: 4990, descripcion: 'Exótica orquídea blanca de larga duración',            emoji: '🌸', categoria: 'Orquídeas' },
-  { id: 5, nombre: 'Lavanda',         precio: 2490, descripcion: 'Aromática lavanda con propiedades relajantes',          emoji: '💜', categoria: 'Especiales'},
-  { id: 6, nombre: 'Margarita',       precio: 990,  descripcion: 'Pequeña y adorable margarita campestre',               emoji: '🌼', categoria: 'Silvestres'},
-  { id: 7, nombre: 'Peonía Rosa',     precio: 3490, descripcion: 'Voluminosa peonía de color rosa suave',                emoji: '🌸', categoria: 'Especiales'},
-  { id: 8, nombre: 'Cala Blanca',     precio: 2990, descripcion: 'Elegante cala blanca ideal para ocasiones especiales', emoji: '🤍', categoria: 'Especiales'},
-  { id: 9, nombre: 'Rosa Amarilla',   precio: 2490, descripcion: 'Rosa de color amarillo sol que transmite alegría',     emoji: '🌹', categoria: 'Rosas'     },
-  { id: 10, nombre: 'Lirio Azul',     precio: 3290, descripcion: 'Exótico lirio de color azul violáceo',                 emoji: '💙', categoria: 'Especiales'},
+  { id: 1, nombre: 'Ramo Estelar', precio: 4290, descripcion: 'Ramo elegante preparado para regalar en ocasiones especiales.', categoria: 'Regalar', tipo: 'Ramo', imagen: '' },
+  { id: 2, nombre: 'Bouquet Romántico', precio: 4890, descripcion: 'Ramo mixto ideal para aniversarios con toque clásico.', categoria: 'Regalar', tipo: 'Ramo', imagen: '' },
+  { id: 3, nombre: 'Arreglo Boda Blanca', precio: 6390, descripcion: 'Arreglo nupcial refinado para ceremonias y recepciones.', categoria: 'Arreglos', tipo: 'Boda', imagen: '' },
+  { id: 4, nombre: 'Corona de Condolencias', precio: 5490, descripcion: 'Arreglo solemne y respetuoso para funerales y homenajes.', categoria: 'Arreglos', tipo: 'Funeral', imagen: '' },
+  { id: 5, nombre: 'Centro de Mesa Elegante', precio: 3790, descripcion: 'Arreglo decorativo para eventos especiales y cenas formales.', categoria: 'Arreglos', tipo: 'Evento', imagen: '' },
+  { id: 6, nombre: 'Macetero de Suculentas', precio: 2490, descripcion: 'Combinación de suculentas en maceta lista para plantar y decorar.', categoria: 'Plantar', tipo: 'Macetero', imagen: '' },
+  { id: 7, nombre: 'Kit de Semillas Florales', precio: 1790, descripcion: 'Pack de semillas para plantar y ver crecer un jardín de colores.', categoria: 'Plantar', tipo: 'Semillas', imagen: '' },
+  { id: 8, nombre: 'Jardín Aromático', precio: 2990, descripcion: 'Macetero con plantas aromáticas para cultivar en casa.', categoria: 'Plantar', tipo: 'Macetero', imagen: '' },
+  { id: 9, nombre: 'Ramo de Celebración', precio: 4390, descripcion: 'Ramo vibrante ideal para cumpleaños y felicitaciones.', categoria: 'Regalar', tipo: 'Ramo', imagen: '' },
+  { id: 10, nombre: 'Arreglo Corporativo', precio: 5590, descripcion: 'Arreglo moderno diseñado para oficinas y salas de espera.', categoria: 'Arreglos', tipo: 'Decoración', imagen: '' },
 ];
 
 // =============================================
@@ -74,7 +74,9 @@ function renderizarProductos(lista) {
 
   grid.innerHTML = lista.map(p => `
     <div class="producto-card" data-id="${p.id}">
-      <div class="producto-imagen">${p.emoji}</div>
+      <div class="producto-imagen">
+        ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}" />` : '<div class="imagen-placeholder"></div>'}
+      </div>
       <div class="producto-info">
         <span class="producto-categoria">${p.categoria}</span>
         <h3 class="producto-nombre">${p.nombre}</h3>
@@ -168,7 +170,6 @@ function actualizarCarritoUI() {
   // Renderizar items del carrito
   itemsDiv.innerHTML = items.map(item => `
     <div class="cart-item">
-      <span class="cart-item-emoji">${item.producto.emoji}</span>
       <div class="cart-item-info">
         <div class="cart-item-nombre">${item.producto.nombre}</div>
         <div class="cart-item-precio">$${(item.producto.precio * item.cantidad).toLocaleString('es-CL')}</div>
@@ -229,7 +230,7 @@ btnCheckout.addEventListener('click', () => {
 
   resumenDiv.innerHTML = items.map(item => `
     <div class="modal-resumen-item">
-      <span>${item.producto.emoji} ${item.producto.nombre} x${item.cantidad}</span>
+      <span>${item.producto.nombre} x${item.cantidad}</span>
       <span>$${(item.producto.precio * item.cantidad).toLocaleString('es-CL')}</span>
     </div>
   `).join('');
