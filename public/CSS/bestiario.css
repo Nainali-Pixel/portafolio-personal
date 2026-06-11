@@ -794,7 +794,7 @@ main.bestiario-main {
 }
 
 .detalle-texto {
-  color: var(--ice-white);
+  color: var(--text-main);
   line-height: 1.8;
   margin-bottom: 20px;
 }
@@ -816,7 +816,7 @@ main.bestiario-main {
 .detalle-grid strong {
   display: block;
   margin-bottom: 8px;
-  color: var(--ice-white);
+  color: var(--text-main);
 }
 
 .detalle-grid span {
@@ -829,7 +829,7 @@ main.bestiario-main {
 }
 
 .detalle-curiosidad p {
-  color: var(--ice-white);
+  color: var(--text-main);
   line-height: 1.8;
 }
 

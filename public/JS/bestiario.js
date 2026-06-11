@@ -37,7 +37,18 @@ const TODAS_LAS_CRATUREAS = [
   { id: 3, nombre: 'Guardiana de Cristal', tipo: 'Místico', descripcion: 'Protege los secretos de los bosques encantados.', poder: 'Escudo de luz', atributo: 'Magia', habitat: 'Bosques encantados', alimentacion: 'Bayas cristalinas y rocío', datos_curiosos: 'Aprecia las leyendas antiguas', tamano: '1.4 m', peso: '32 kg', rareza: 'Épica', nivel: 5 },
   { id: 4, nombre: 'Abyssal Coral', tipo: 'Acuático', descripcion: 'Nace entre arrecifes con destellos de galaxias marinas.', poder: 'Tromba marina', atributo: 'Agua', habitat: 'Arrecifes profundos', alimentacion: 'Plancton estelar y corrientes frías', datos_curiosos: 'Cambia de color con la marea', tamano: '1.6 m', peso: '38 kg', rareza: 'Rara', nivel: 4 },
   { id: 5, nombre: 'Fénix Nebular', tipo: 'Aéreo', descripcion: 'Resurge de las cenizas con plumas de neón cósmico.', poder: 'Llama astral', atributo: 'Fuego', habitat: 'Cielos nocturnos', alimentacion: 'Brasa cósmica y semillas de estrella', datos_curiosos: 'Su canto crea auroras', tamano: '1.9 m', peso: '24 kg', rareza: 'Legendaria', nivel: 5 },
-  { id: 6, nombre: 'Titán Lunar', tipo: 'Terrestre', descripcion: 'Pisa la tierra dejando senderos de polvo de estrellas.', poder: 'Terremoto lunar', atributo: 'Tierra', habitat: 'Llanuras de piedra lunar', alimentacion: 'Raíces energizadas y minerales', datos_curiosos: 'Sus pisadas despiertan cristales', tamano: '2.4 m', peso: '110 kg', rareza: 'Épica', nivel: 5 }
+  { id: 6, nombre: 'Titán Lunar', tipo: 'Terrestre', descripcion: 'Pisa la tierra dejando senderos de polvo de estrellas.', poder: 'Terremoto lunar', atributo: 'Tierra', habitat: 'Llanuras de piedra lunar', alimentacion: 'Raíces energizadas y minerales', datos_curiosos: 'Sus pisadas despiertan cristales', tamano: '2.4 m', peso: '110 kg', rareza: 'Épica', nivel: 5 },
+  { id: 7, nombre: 'Aurora Serpiente', tipo: 'Acuático', descripcion: 'Surge entre las auroras con escamas de luz.', poder: 'Resplandor frio', atributo: 'Agua', habitat: 'Ríos boreales', alimentacion: 'Hielo lumínico', datos_curiosos: 'Cambia de color según el clima', tamano: '3.5 m', peso: '85 kg', rareza: 'Rara', nivel: 4 },
+  { id: 8, nombre: 'Víbora Boreal', tipo: 'Terrestre', descripcion: 'Su cola emite polvo de estrellas en cada paso.', poder: 'Veneno glacial', atributo: 'Tierra', habitat: 'Tundras congeladas', alimentacion: 'Musgo estelar', datos_curiosos: 'Su veneno congela', tamano: '2.2 m', peso: '40 kg', rareza: 'Épica', nivel: 5 },
+  { id: 9, nombre: 'Draco Nitro', tipo: 'Aéreo', descripcion: 'Sus alas eléctricas rasgan el cielo nocturno.', poder: 'Rayo oscuro', atributo: 'Aire', habitat: 'Cumbres tormentosas', alimentacion: 'Rayos y ozono', datos_curiosos: 'Sus ronquidos suenan como truenos', tamano: '4.5 m', peso: '210 kg', rareza: 'Legendaria', nivel: 5 },
+  { id: 10, nombre: 'Quimera Sombra', tipo: 'Místico', descripcion: 'Nacida del fuego y la niebla eterna.', poder: 'Furia onírica', atributo: 'Magia', habitat: 'Cuevas abisales', alimentacion: 'Sueños perdidos', datos_curiosos: 'Puede atravesar paredes oscuras', tamano: '2.8 m', peso: '150 kg', rareza: 'Épica', nivel: 5 },
+  { id: 11, nombre: 'Fuego del Abismo', tipo: 'Terrestre', descripcion: 'Los volcanes obedecen su presencia.', poder: 'Llama eterna', atributo: 'Fuego', habitat: 'Fosas volcánicas', alimentacion: 'Magma y carbón', datos_curiosos: 'Sus pasos derriten la roca', tamano: '3.0 m', peso: '500 kg', rareza: 'Rara', nivel: 4 },
+  { id: 12, nombre: 'Selene Niebla', tipo: 'Aéreo', descripcion: 'Aparece entre nubes y susurra secretos.', poder: 'Cosquilleo lunar', atributo: 'Aire', habitat: 'Valles neblinosos', alimentacion: 'Rocío de medianoche', datos_curiosos: 'Es invisible de día', tamano: '1.2 m', peso: '12 kg', rareza: 'Rara', nivel: 4 },
+  { id: 13, nombre: 'Lince Lunar', tipo: 'Terrestre', descripcion: 'Sus pasos no dejan huellas en la noche.', poder: 'Sigilo estelar', atributo: 'Tierra', habitat: 'Bosques de coníferas', alimentacion: 'Frutos lunares', datos_curiosos: 'Sus ojos brillan como faros', tamano: '1.5 m', peso: '45 kg', rareza: 'Épica', nivel: 4 },
+  { id: 14, nombre: 'Ninfa Crepuscular', tipo: 'Místico', descripcion: 'Vive entre la bruma que aparece al atardecer.', poder: 'Encanto de penumbra', atributo: 'Magia', habitat: 'Claros del atardecer', alimentacion: 'Néctar de sol', datos_curiosos: 'Su risa cura heridas', tamano: '1.1 m', peso: '20 kg', rareza: 'Rara', nivel: 4 },
+  { id: 15, nombre: 'Golem de Raíz', tipo: 'Terrestre', descripcion: 'Despierta gusanos antiguos con cada pisada.', poder: 'Regeneración', atributo: 'Tierra', habitat: 'Bosques ancestrales', alimentacion: 'Minerales profundos', datos_curiosos: 'Puede dormir por siglos', tamano: '5.0 m', peso: '1200 kg', rareza: 'Rara', nivel: 4 },
+  { id: 16, nombre: 'Espíritu del Valle', tipo: 'Místico', descripcion: 'Protege los valles y a los viajeros perdidos.', poder: 'Bendición verde', atributo: 'Magia', habitat: 'Cañones místicos', alimentacion: 'Energía eólica', datos_curiosos: 'Guía a los viajeros con luces', tamano: '2.0 m', peso: '0 kg', rareza: 'Legendaria', nivel: 5 },
+  { id: 17, nombre: 'Cuervo Umbral', tipo: 'Aéreo', descripcion: 'Aparece entre las sombras y lleva mensajes.', poder: 'Vigilia eterna', atributo: 'Aire', habitat: 'Ruinas antiguas', alimentacion: 'Ecos del pasado', datos_curiosos: 'Repite palabras olvidadas', tamano: '0.8 m', peso: '3 kg', rareza: 'Rara', nivel: 4 }
 ];
 
 function mostrarAlertaLogin(mensaje, tipo = 'error') {
@@ -301,12 +312,12 @@ perfilForm.addEventListener('submit', async (event) => {
       actualizarPerfilUI();
       usuarioNombre.textContent = usuarioActual.nombre;
       cerrarPerfilModal();
-      mostrarAlertaLogin('✅ Perfil actualizado correctamente', 'success');
+      mostrarAlertaLogin('Perfil actualizado correctamente', 'success');
     } else {
-      mostrarAlertaLogin(`❌ ${datos.msg}`);
+      mostrarAlertaLogin(`Error: ${datos.msg}`);
     }
   } catch (error) {
-    mostrarAlertaLogin('❌ Error al actualizar el perfil. Intenta de nuevo.');
+    mostrarAlertaLogin('Error al actualizar el perfil. Intenta de nuevo.');
   }
 });
 
