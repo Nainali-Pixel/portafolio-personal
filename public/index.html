@@ -1,61 +1,290 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio</title>
-    <link rel="stylesheet" href="./CSS/Styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio | Milena Escobar</title>
+  <link rel="stylesheet" href="./CSS/Styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Bienvenido a mi Portafolio Personal</h1>
-        <nav>
-            <a href="#inicio" data-page="inicio">Inicio</a>
-            <a href="#sobre-mi" data-page="sobre-mi">Sobre mí</a>
-            <a href="#proyectos" data-page="proyectos">Proyectos</a>
-            <a href="#contacto" data-page="contacto">Contacto</a>
-        </nav>
-    </header>
-    <main>
-        <section id="inicio" class="page active">
-            <h2>¡Hola!</h2>
-            <p>Bienvenido a mi portafolio personal. Aquí encontrarás información sobre mí, mis proyectos y cómo contactarme.</p>
-        </section>
-        <section id="sobre-mi" class="page">
-            <div>
-                <p>
-                    Hola, soy Milena Escobar y soy una desarrolladora web apasionada por crear experiencias digitales únicas. 
-                    <br>Actualmente estudiante de Analista Programador en el Insitituto Santo Tomás.
-                    <br>Me especializo en el desarrollo frontend, utilizando tecnologías como HTML, CSS y JavaScript para construir interfaces atractivas y funcionales. 
-                </p>
+  <!-- Fondo animado: nebulas y estrellas -->
+  <canvas id="starfield"></canvas>
+  <div class="nebula nebula-1"></div>
+  <div class="nebula nebula-2"></div>
+  <div class="nebula nebula-3"></div>
+
+  <!-- Navegacion fija con efecto glassmorphism -->
+  <header id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-symbol">&lt;</span>ME<span class="logo-symbol">/&gt;</span>
+      </div>
+      <nav>
+        <a href="#inicio"    data-page="inicio"     class="nav-link active">Inicio</a>
+        <a href="#sobre-mi"  data-page="sobre-mi"   class="nav-link">Sobre mí</a>
+        <a href="#habilidades" data-page="habilidades" class="nav-link">Habilidades</a>
+        <a href="#proyectos" data-page="proyectos"  class="nav-link">Proyectos</a>
+        <a href="#contacto"  data-page="contacto"   class="nav-link">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== INICIO ========== -->
+    <section id="inicio" class="page active">
+      <div class="hero-content">
+        <div class="hero-badge">✦ Disponible para proyectos ✦</div>
+        <h1 class="hero-title">
+          ¡Hola! Soy<br>
+          <span class="typewriter-text" id="typewriter"></span>
+        </h1>
+        <p class="hero-subtitle">
+          Desarrolladora Web en formación · Apasionada por el Frontend<br>
+          Estudiante de Analista Programador en Instituto Santo Tomás
+        </p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="navegarA('proyectos')">
+            🚀 Ver Proyectos
+          </button>
+          <button class="btn-secondary" onclick="navegarA('contacto')">
+            💬 Contactarme
+          </button>
+        </div>
+        <div class="hero-scroll">
+          <span>Desliza hacia abajo</span>
+          <div class="scroll-arrow">↓</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SOBRE MÍ ========== -->
+    <section id="sobre-mi" class="page">
+      <div class="section-header">
+        <span class="section-tag">// 01</span>
+        <h2 class="section-title">Sobre <span class="accent">Mí</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-avatar">
+          <div class="avatar-circle">
+            <span class="avatar-initials">ME</span>
+          </div>
+          <div class="avatar-glow"></div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="about-text">
+          <p>
+            Hola, soy <strong>Milena Escobar</strong> 👩‍💻, desarrolladora web apasionada
+            por crear experiencias digitales únicas. Actualmente soy estudiante de
+            <em>Analista Programador</em> en el Instituto Santo Tomás.
+          </p>
+          <p>
+            Me especializo en el desarrollo <strong>frontend</strong>, utilizando
+            tecnologías como HTML, CSS y JavaScript para construir interfaces atractivas
+            y funcionales. También tengo experiencia en backend con <strong>Node.js</strong>
+            y bases de datos con <strong>MySQL</strong>.
+          </p>
+          <p>
+            Cuando no estoy programando, me gusta explorar nuevas tendencias en diseño
+            web y aprender sobre accesibilidad y experiencia de usuario.
+          </p>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-number" data-target="2">0</span>
+              <span class="stat-label">Proyectos</span>
             </div>
-        </section>
-        <section id="proyectos" class="page">
-            <div class="project-card">
-                <h2>Proyecto 1: Aplicación de Tareas</h2>
-                <p>Descripción: Una aplicación web para gestionar tareas diarias.</p>
+            <div class="stat-card">
+              <span class="stat-number" data-target="6">0</span>
+              <span class="stat-label">Tecnologías</span>
             </div>
-            <div class="project-card">
-                <h2>Proyecto 2: Blog Personal</h2>
-                <p>Descripción: Un blog personal para compartir mis pensamientos y experiencias.</p>
+            <div class="stat-card">
+              <span class="stat-number" data-target="10">0</span>
+              <span class="stat-label">Commits+</span>
             </div>
-        </section>
-        <section id="contacto" class="page">
-            <form id="contact-form">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="name" required>
-                <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" required>
-                <label for="mensaje">Mensaje</label>
-                <textarea id="mensaje" name="message" required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
-            <div id="alerta" class="alert"></div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Mi Portafolio Personal. Todos los derechos reservados.</p>
-    </footer>
-    <script src="./JS/app.js"></script>
+            <div class="stat-card">
+              <span class="stat-number" data-target="100">0</span>
+              <span class="stat-label">% Dedicación</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HABILIDADES ========== -->
+    <section id="habilidades" class="page">
+      <div class="section-header">
+        <span class="section-tag">// 02</span>
+        <h2 class="section-title">Mis <span class="accent">Habilidades</span></h2>
+      </div>
+      <div class="skills-container">
+        <div class="skills-column">
+          <h3 class="skills-subtitle">Frontend</h3>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">🌐</span>
+              <span class="skill-name">HTML5</span>
+              <span class="skill-percent">85%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">🎨</span>
+              <span class="skill-name">CSS3</span>
+              <span class="skill-percent">80%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">⚡</span>
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-percent">70%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+          </div>
+        </div>
+        <div class="skills-column">
+          <h3 class="skills-subtitle">Backend &amp; Tools</h3>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">🟢</span>
+              <span class="skill-name">Node.js</span>
+              <span class="skill-percent">60%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">🗃️</span>
+              <span class="skill-name">MySQL</span>
+              <span class="skill-percent">65%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-icon">🐙</span>
+              <span class="skill-name">Git / GitHub</span>
+              <span class="skill-percent">75%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-badges">
+        <span class="tech-badge">Express.js</span>
+        <span class="tech-badge">npm</span>
+        <span class="tech-badge">VS Code</span>
+        <span class="tech-badge">Responsive Design</span>
+        <span class="tech-badge">REST API</span>
+        <span class="tech-badge">XAMPP</span>
+      </div>
+    </section>
+
+    <!-- ========== PROYECTOS ========== -->
+    <section id="proyectos" class="page">
+      <div class="section-header">
+        <span class="section-tag">// 03</span>
+        <h2 class="section-title">Mis <span class="accent">Proyectos</span></h2>
+      </div>
+      <div class="projects-grid">
+        <!-- Proyecto 1: Tienda de Flores -->
+        <div class="project-card">
+          <div class="project-badge">Proyecto 01</div>
+          <div class="project-icon">🌸</div>
+          <h3 class="project-title">Tienda de Flores</h3>
+          <p class="project-desc">
+            Tienda online que simula la venta de flores y arreglos florales.
+            Permite agregar productos al carrito, calcular el total y registrar
+            pedidos en la base de datos.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MySQL</span>
+          </div>
+          <a href="./tienda-flores/index.html" class="project-btn">
+            Ver Proyecto →
+          </a>
+        </div>
+
+        <!-- Proyecto 2: Bestiario Místico -->
+        <div class="project-card">
+          <div class="project-badge">Proyecto 02</div>
+          <div class="project-icon">🐉</div>
+          <h3 class="project-title">Bestiario Místico</h3>
+          <p class="project-desc">
+            Diccionario de animales míticos estilo Pokédex. Requiere iniciar sesión
+            para ver tu colección personal. Cada usuario tiene criaturas distintas
+            según su cuenta de cazador o guardiana.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">HTML</span>
+            <span class="tech-tag">CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Login</span>
+            <span class="tech-tag">Colecciones</span>
+          </div>
+          <a href="./bestiario/index.html" class="project-btn">
+            Ver Proyecto →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section id="contacto" class="page">
+      <div class="section-header">
+        <span class="section-tag">// 04</span>
+        <h2 class="section-title">Con<span class="accent">tacto</span></h2>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>¿Hablamos?</h3>
+          <p>
+            Si tienes alguna consulta, propuesta de proyecto o simplemente
+            quieres saludar, no dudes en escribirme. Respondo a todos los mensajes.
+          </p>
+          <div class="contact-links">
+            <a href="https://github.com/Nainali-Pixel" target="_blank" class="contact-link">
+              🐙 GitHub
+            </a>
+            <a href="#" class="contact-link">📧 milena@email.com</a>
+          </div>
+        </div>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" placeholder="¿En qué puedo ayudarte?" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="btn-enviar">
+            <span>Enviar Mensaje 🚀</span>
+          </button>
+          <div id="alerta" class="alerta"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <span class="logo-symbol">&lt;</span>ME<span class="logo-symbol">/&gt;</span>
+      &copy; 2024 Milena Escobar · Todos los derechos reservados
+    </p>
+    <p class="footer-sub">Hecho con 💙 y mucho café</p>
+  </footer>
+
+  <script src="./JS/app.js"></script>
 </body>
 </html>
