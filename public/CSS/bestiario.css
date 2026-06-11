@@ -7,50 +7,67 @@
   --violet-glow: #d0a8ff;
   --ice-white: #f7fbff;
   --highlight-white: #ffffff;
-  --text-main: var(--highlight-white);
-  --text-muted: #d5dae7;
-  --surface: rgba(255,255,255,0.08);
-  --surface-strong: rgba(255,255,255,0.12);
-  --surface-muted: rgba(255,255,255,0.06);
-  --surface-border: rgba(255,255,255,0.14);
-  --surface-border-soft: rgba(255,255,255,0.08);
-  --panel-bg: rgba(248, 250, 255, 0.12);
-  --glass-border: rgba(100, 244, 255, 0.16);
-  --theme-toggle-bg: rgba(255,255,255,0.08);
-  --theme-toggle-hover: rgba(155, 114, 255, 0.16);
-  --btn-login-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(100, 244, 255, 0.68));
-  --btn-login-hover-shadow: rgba(255, 255, 255, 0.45);
-  --btn-login-color: #04121f;
-  --btn-logout-bg: linear-gradient(135deg, rgba(244, 202, 107, 0.22), rgba(214, 154, 47, 0.22));
-  --btn-logout-color: var(--deep-ocean);
-  --filter-active-bg: rgba(59, 243, 255, 0.15);
-  --view-active-bg: rgba(59, 243, 255, 0.15);
-  --card-bg: rgba(8, 20, 51, 0.92);
-  --shadow-panel: rgba(39, 14, 105, 0.35);
-  --shadow-light: rgba(86, 40, 147, 0.18);
-  --golden-amber: #f4ca6b;
-  --golden-amber-strong: #d69a2f;
+  --text-main: #1f2230;
+  --text-muted: #5c627a;
+  --surface: rgba(255,255,255,0.94);
+  --surface-strong: rgba(255,255,255,0.98);
+  --surface-muted: rgba(255,255,255,0.78);
+  --surface-border: rgba(155, 114, 255, 0.24);
+  --surface-border-soft: rgba(155, 114, 255, 0.14);
+  --panel-shadow: rgba(155, 114, 255, 0.12);
+  --card-shadow: rgba(15, 23, 42, 0.12);
+  --bg-primary: radial-gradient(circle at 30% 20%, rgba(155, 114, 255, 0.18), transparent 18%), radial-gradient(circle at 80% 10%, rgba(155, 114, 255, 0.12), transparent 18%), linear-gradient(180deg, #ffffff 0%, #f5f7ff 100%);
+  --bg-backdrop: radial-gradient(circle at 20% 20%, rgba(155, 114, 255, 0.12), transparent 22%), radial-gradient(circle at 85% 15%, rgba(244, 202, 107, 0.18), transparent 20%), radial-gradient(circle at 45% 90%, rgba(255, 255, 255, 0.2), transparent 15%);
+  --theme-toggle-bg: rgba(255,255,255,0.9);
+  --theme-toggle-hover: rgba(155, 114, 255, 0.2);
+  --btn-login-bg: linear-gradient(135deg, rgba(155, 114, 255, 0.92), rgba(244, 202, 107, 0.92));
+  --btn-login-hover-shadow: rgba(155, 114, 255, 0.2);
+  --btn-login-color: #120f25;
+  --btn-logout-bg: linear-gradient(135deg, rgba(244, 202, 107, 0.28), rgba(214, 154, 47, 0.28));
+  --btn-logout-color: #120f25;
+  --filter-active-bg: rgba(166, 123, 255, 0.18);
+  --view-active-bg: rgba(166, 123, 255, 0.18);
+  --card-bg: rgba(255,255,255,0.96);
+  --card-border: rgba(155, 114, 255, 0.16);
+  --accent: var(--nebula-violet);
+  --accent-cyan: var(--nebula-cyan);
+  --accent-gold: #d69a2f;
+  --accent-soft: rgba(155, 114, 255, 0.12);
+  --input-bg: rgba(255,255,255,0.84);
+  --input-border: rgba(155, 114, 255, 0.16);
+  --detail-backdrop: rgba(255,255,255,0.92);
 }
 
 .dark-theme {
-  --text-main: var(--ice-white);
-  --text-muted: #94a3b8;
-  --surface: rgba(23, 8, 47, 0.92);
-  --surface-strong: rgba(12, 4, 39, 0.95);
-  --surface-muted: rgba(255,255,255,0.06);
-  --surface-border: rgba(255,255,255,0.12);
-  --surface-border-soft: rgba(255,255,255,0.08);
-  --theme-toggle-bg: rgba(255,255,255,0.08);
-  --theme-toggle-hover: rgba(155, 114, 255, 0.18);
+  --text-main: #f7f9ff;
+  --text-muted: #9ca8cc;
+  --surface: rgba(80, 33, 139, 0.92);
+  --surface-strong: rgba(23, 8, 47, 0.95);
+  --surface-muted: rgba(255,255,255,0.08);
+  --surface-border: rgba(59, 243, 255, 0.18);
+  --surface-border-soft: rgba(59, 243, 255, 0.12);
+  --panel-shadow: rgba(86, 40, 147, 0.28);
+  --card-shadow: rgba(0, 0, 0, 0.35);
+  --bg-primary: radial-gradient(circle at 30% 20%, rgba(155, 114, 255, 0.28), transparent 18%), radial-gradient(circle at 80% 10%, rgba(59, 243, 255, 0.22), transparent 18%), linear-gradient(180deg, #1c0b3f 0%, #05020d 100%);
+  --bg-backdrop: radial-gradient(circle at 20% 20%, rgba(59, 243, 255, 0.22), transparent 22%), radial-gradient(circle at 85% 15%, rgba(155, 114, 255, 0.24), transparent 20%), radial-gradient(circle at 45% 90%, rgba(255, 255, 255, 0.08), transparent 15%);
+  --theme-toggle-bg: rgba(155, 114, 255, 0.18);
+  --theme-toggle-hover: rgba(59, 243, 255, 0.24);
   --btn-login-bg: linear-gradient(135deg, var(--nebula-cyan), var(--violet-glow));
   --btn-login-hover-shadow: rgba(63, 210, 255, 0.3);
   --btn-login-color: #04121f;
-  --btn-logout-bg: linear-gradient(135deg, rgba(255, 202, 84, 0.18), rgba(255, 175, 59, 0.22));
+  --btn-logout-bg: linear-gradient(135deg, rgba(244, 202, 107, 0.18), rgba(214, 154, 47, 0.22));
   --btn-logout-color: #fff;
-  --filter-active-bg: rgba(155, 114, 255, 0.18);
-  --view-active-bg: rgba(155, 114, 255, 0.18);
-  --card-bg: rgba(8, 20, 51, 0.92);
-  --shadow-panel: rgba(86, 40, 147, 0.22);
+  --filter-active-bg: rgba(59, 243, 255, 0.18);
+  --view-active-bg: rgba(59, 243, 255, 0.18);
+  --card-bg: rgba(12, 4, 39, 0.92);
+  --card-border: rgba(59, 243, 255, 0.14);
+  --accent: var(--nebula-cyan);
+  --accent-cyan: var(--nebula-cyan);
+  --accent-gold: #f4ca6b;
+  --accent-soft: rgba(59, 243, 255, 0.12);
+  --input-bg: rgba(255,255,255,0.05);
+  --input-border: rgba(59, 243, 255, 0.12);
+  --detail-backdrop: rgba(3, 6, 26, 0.92);
 }
 
 * {
@@ -62,17 +79,15 @@
 body {
   min-height: 100vh;
   font-family: 'Rajdhani', sans-serif;
-  color: var(--highlight-white);
-  background: radial-gradient(circle at 30% 20%, rgba(155, 114, 255, 0.18), transparent 18%),
-              radial-gradient(circle at 80% 10%, rgba(59, 243, 255, 0.14), transparent 18%),
-              linear-gradient(180deg, #120436 0%, #05020d 100%);
+  color: var(--text-main);
+  background: var(--bg-primary);
   overflow-x: hidden;
 }
 
 .bestiario-backdrop {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(59, 243, 255, 0.2), transparent 22%), radial-gradient(circle at 85% 15%, rgba(155, 114, 255, 0.18), transparent 20%), radial-gradient(circle at 45% 90%, rgba(255, 255, 255, 0.05), transparent 15%);
+  background: var(--bg-backdrop);
   pointer-events: none;
 }
 
@@ -90,8 +105,8 @@ body {
 
 .theme-toggle {
   background: var(--theme-toggle-bg);
-  color: var(--highlight-white);
-  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-main);
+  border: 1px solid var(--surface-border-soft);
   border-radius: 999px;
   padding: 10px 18px;
   cursor: pointer;
@@ -104,11 +119,11 @@ body {
 }
 
 .back-link {
-  color: var(--ice-white);
+  color: var(--text-main);
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.4px;
-  border: 1px solid rgba(228, 244, 255, 0.15);
+  border: 1px solid var(--surface-border-soft);
   padding: 10px 16px;
   border-radius: 999px;
   transition: transform 0.25s ease, background 0.25s ease;
@@ -171,7 +186,7 @@ main.bestiario-main {
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: 32px;
-  box-shadow: 0 20px 60px var(--shadow-panel);
+  box-shadow: 0 20px 60px var(--panel-shadow);
 }
 
 .eyebrow {
@@ -199,7 +214,7 @@ main.bestiario-main {
 .perfil-card h3,
 .detalle-texto,
 .detalle-grid strong {
-  color: var(--highlight-white);
+  color: var(--text-main);
 }
 
 .login-card {
@@ -207,7 +222,7 @@ main.bestiario-main {
   border: 1px solid var(--surface-border);
   border-radius: 32px;
   padding: 36px;
-  box-shadow: 0 30px 80px var(--shadow-light);
+  box-shadow: 0 30px 80px var(--panel-shadow);
   backdrop-filter: blur(12px);
 }
 
@@ -227,10 +242,10 @@ main.bestiario-main {
 
 .login-card input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 16px;
-  color: var(--ice-white);
+  color: var(--text-main);
   padding: 14px 16px;
   margin-bottom: 18px;
   outline: none;
@@ -238,7 +253,7 @@ main.bestiario-main {
 }
 
 .login-card input:focus {
-  border-color: var(--nebula-cyan);
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
 
@@ -287,13 +302,13 @@ main.bestiario-main {
 }
 
 .coleccion-panel {
-  background: linear-gradient(180deg, rgba(12, 4, 39, 0.95), rgba(8, 2, 30, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface-strong);
+  border: 1px solid var(--surface-border);
   border-radius: 32px;
   padding: 32px;
   backdrop-filter: blur(18px);
   margin-top: 24px;
-  box-shadow: 0 24px 100px rgba(86, 40, 147, 0.18);
+  box-shadow: 0 24px 100px var(--panel-shadow);
 }
 
 .coleccion-panel.hidden {
@@ -316,7 +331,7 @@ main.bestiario-main {
 }
 
 .coleccion-header span {
-  color: var(--nebula-cyan);
+  color: var(--accent);
 }
 
 .coleccion-header p {
@@ -357,7 +372,7 @@ main.bestiario-main {
 .view-tab {
   background: var(--surface-muted);
   border: 1px solid var(--surface-border-soft);
-  color: var(--highlight-white);
+  color: var(--text-main);
   padding: 10px 18px;
   border-radius: 999px;
   cursor: pointer;
@@ -439,8 +454,8 @@ main.bestiario-main {
 }
 
 .btn-save {
-  background: linear-gradient(135deg, rgba(235, 225, 255, 0.18), rgba(59, 243, 255, 0.18));
-  color: var(--ice-white);
+  background: linear-gradient(135deg, rgba(244, 202, 107, 0.22), rgba(214, 154, 47, 0.22));
+  color: var(--text-main);
   width: 100%;
 }
 
@@ -515,7 +530,7 @@ main.bestiario-main {
 .filter-btn {
   background: var(--surface-muted);
   border: 1px solid var(--surface-border-soft);
-  color: var(--highlight-white);
+  color: var(--text-main);
   padding: 10px 18px;
   border-radius: 999px;
   cursor: pointer;
@@ -539,9 +554,9 @@ main.bestiario-main {
   width: 100%;
   padding: 14px 18px;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--ice-white);
+  border: 1px solid var(--surface-border-soft);
+  background: var(--input-bg);
+  color: var(--text-main);
   outline: none;
 }
 
@@ -557,12 +572,12 @@ main.bestiario-main {
 
 .friends-panel,
 .map-panel {
-  background: linear-gradient(180deg, rgba(15, 8, 48, 0.95), rgba(7, 3, 28, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface-strong);
+  border: 1px solid var(--surface-border);
   border-radius: 32px;
   padding: 28px;
   margin-top: 24px;
-  box-shadow: 0 20px 70px rgba(49, 23, 97, 0.22);
+  box-shadow: 0 20px 70px var(--panel-shadow);
 }
 
 .section-title {
@@ -581,8 +596,8 @@ main.bestiario-main {
 }
 
 .friend-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-muted);
+  border: 1px solid var(--surface-border-soft);
   border-radius: 24px;
   padding: 20px;
   display: flex;
@@ -592,7 +607,7 @@ main.bestiario-main {
 }
 
 .friend-card.friend-me {
-  border-color: rgba(155, 114, 255, 0.45);
+  border-color: var(--accent);
 }
 
 .friend-card h4 {
@@ -606,7 +621,7 @@ main.bestiario-main {
 }
 
 .friend-view-btn {
-  background: linear-gradient(135deg, var(--nebula-cyan), var(--violet-glow));
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
   border: none;
   color: #04121f;
   border-radius: 999px;
@@ -626,8 +641,8 @@ main.bestiario-main {
 }
 
 .zona-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-muted);
+  border: 1px solid var(--surface-border-soft);
   border-radius: 24px;
   padding: 22px;
   min-height: 150px;
@@ -635,7 +650,7 @@ main.bestiario-main {
 
 .zona-card h4 {
   margin-bottom: 12px;
-  color: var(--nebula-cyan);
+  color: var(--accent);
 }
 
 .zona-card p {
@@ -645,12 +660,12 @@ main.bestiario-main {
 
 .bestiario-card {
   background: var(--card-bg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
   border-radius: 24px;
   padding: 24px;
   display: grid;
   gap: 18px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 18px 50px var(--card-shadow);
 }
 
 .card-icon {
@@ -673,7 +688,7 @@ main.bestiario-main {
 .card-level {
   background: rgba(244, 202, 107, 0.14);
   border: 1px solid rgba(244, 202, 107, 0.3);
-  color: var(--golden-amber-strong);
+  color: var(--accent-gold);
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.85rem;
@@ -689,7 +704,7 @@ main.bestiario-main {
 }
 
 .card-description {
-  color: var(--ice-white);
+  color: var(--text-main);
   line-height: 1.7;
 }
 
@@ -707,7 +722,7 @@ main.bestiario-main {
 }
 
 .lock-label {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--surface-muted);
   color: var(--text-muted);
   text-align: center;
   padding: 10px 12px;
@@ -719,7 +734,7 @@ main.bestiario-main {
 .detalle-panel {
   position: fixed;
   inset: 0;
-  background: rgba(3, 6, 26, 0.92);
+  background: var(--detail-backdrop);
   backdrop-filter: blur(10px);
   display: grid;
   place-items: center;
@@ -748,8 +763,8 @@ main.bestiario-main {
   top: 18px;
   right: 18px;
   border: none;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--ice-white);
+  background: var(--surface-muted);
+  color: var(--text-main);
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -792,8 +807,8 @@ main.bestiario-main {
 }
 
 .detalle-grid div {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-muted);
+  border: 1px solid var(--surface-border-soft);
   border-radius: 18px;
   padding: 18px;
 }
@@ -810,7 +825,7 @@ main.bestiario-main {
 
 .detalle-curiosidad h4 {
   margin-bottom: 10px;
-  color: var(--nebula-cyan);
+  color: var(--accent);
 }
 
 .detalle-curiosidad p {
@@ -823,7 +838,7 @@ main.bestiario-main {
 }
 
 .card-hint {
-  background: rgba(155, 114, 255, 0.14);
+  background: var(--accent-soft);
   padding: 6px 12px;
   border-radius: 999px;
 }

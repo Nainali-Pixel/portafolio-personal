@@ -68,7 +68,7 @@ function renderizarProductos(lista) {
 
   // Si no hay productos
   if (lista.length === 0) {
-    grid.innerHTML = '<p style="color:#999; text-align:center; padding:40px 0; grid-column:1/-1;">No hay productos en esta categoría 🌱</p>';
+    grid.innerHTML = '<p style="color:#999; text-align:center; padding:40px 0; grid-column:1/-1;">No hay productos en esta categoría</p>';
     return;
   }
 
@@ -162,7 +162,7 @@ function actualizarCarritoUI() {
 
   // Si el carrito está vacío
   if (items.length === 0) {
-    itemsDiv.innerHTML = '<p class="cart-empty">Tu carrito está vacío 🌱</p>';
+    itemsDiv.innerHTML = '<p class="cart-empty">Tu carrito está vacío</p>';
     totalDiv.textContent = '$0';
     return;
   }
@@ -261,7 +261,7 @@ checkoutForm.addEventListener('submit', async (e) => {
   const direccion = document.getElementById('checkout-direccion').value.trim();
 
   if (nombre.length < 3) {
-    mostrarNotificacion('⚠️ El nombre debe tener al menos 3 caracteres', 'error');
+    mostrarNotificacion('El nombre debe tener al menos 3 caracteres', 'error');
     return;
   }
 
@@ -295,9 +295,9 @@ checkoutForm.addEventListener('submit', async (e) => {
       carrito = {};
       actualizarCarritoUI();
       checkoutForm.reset();
-      mostrarNotificacion('✅ ¡Pedido confirmado! Gracias por tu compra, ' + nombre + ' 🌸', 'exito');
+      mostrarNotificacion('¡Pedido confirmado! Gracias por tu compra, ' + nombre);
     } else {
-      mostrarNotificacion('❌ Error al procesar el pedido: ' + data.msg, 'error');
+      mostrarNotificacion('Error al procesar el pedido: ' + data.msg, 'error');
     }
   } catch (err) {
     // Si el backend no responde, igual simular éxito
@@ -305,7 +305,7 @@ checkoutForm.addEventListener('submit', async (e) => {
     carrito = {};
     actualizarCarritoUI();
     checkoutForm.reset();
-    mostrarNotificacion('✅ ¡Pedido confirmado! Gracias por tu compra, ' + nombre + ' 🌸', 'exito');
+    mostrarNotificacion('¡Pedido confirmado! Gracias por tu compra, ' + nombre);
   }
 });
 

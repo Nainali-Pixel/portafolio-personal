@@ -397,3 +397,28 @@ viewButtons.forEach(btn => {
 });
 
 searchInput.addEventListener('input', mostrarColeccion);
+
+const themeToggle = document.getElementById('theme-toggle');
+
+function aplicarTemaOscuro(activar) {
+  const body = document.body;
+  if (activar) {
+    body.classList.add('dark-theme');
+    themeToggle.textContent = 'Modo luminoso';
+    localStorage.setItem('bestiarioTema', 'dark');
+  } else {
+    body.classList.remove('dark-theme');
+    themeToggle.textContent = 'Modo nocturno';
+    localStorage.setItem('bestiarioTema', 'light');
+  }
+}
+
+themeToggle.addEventListener('click', () => {
+  const esOscuro = !document.body.classList.contains('dark-theme');
+  aplicarTemaOscuro(esOscuro);
+});
+
+(function cargarTemaInicial() {
+  const temaGuardado = localStorage.getItem('bestiarioTema');
+  aplicarTemaOscuro(temaGuardado === 'dark');
+})();
